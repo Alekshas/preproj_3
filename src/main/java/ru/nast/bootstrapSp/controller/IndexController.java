@@ -30,6 +30,10 @@ public class IndexController {
     public User getCurrentUser() {
         return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
+    @GetMapping("/getUser/{id}")
+    public User getUserById(@PathVariable("id") long id) {
+        return userService.getById(id);
+    }
 
     @GetMapping("/getAllUsers")
     public List<User> getAllUsers() {

@@ -1,8 +1,4 @@
-const newUserForm = document.getElementById("newUserForm");
-newUserForm.addEventLstener("submit", handleFormSubmit);
-
-
-async function addNewUser({url, formData}) {
+async function sendFetchForm({url, formData}) {
     const plainFormData = Object.fromEntries(formData.entries());
     const formDataJsonString = JSON.stringify(plainFormData);
 
@@ -22,8 +18,9 @@ async function addNewUser({url, formData}) {
         throw new Error(errorMessage);
     }
     if (response.ok) {
-        alert("Пользователь успешно добавлен");
-        getUsersFromBD();
+        alert("Форма успешно отправленна!");
+        let event = new Event("update-info");
+        document.dispatchEvent(event);
     }
     return response.json();
 }
@@ -36,7 +33,7 @@ async function handleFormSubmit(event) {
 
     try {
         const formData = new FormData(form);
-        const responseData = await addNewUser({url, formData});
+        const responseData = await sendFetchForm({url, formData});
 
         console.log({responseData});
     } catch (error) {

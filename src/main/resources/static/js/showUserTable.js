@@ -5,7 +5,8 @@ async function getUsersFromBD() {
     let promise = await fetch("http://localhost:8080/index-page/getAllUsers")
     promise.json()
         .then(users => {
-            let table = document.getElementById("userlist")
+            let table = document.getElementById("userlist");
+            table.innerHTML = "";
 
             for (let i = 0; i < users.length; i++) {
                 let roles = '';

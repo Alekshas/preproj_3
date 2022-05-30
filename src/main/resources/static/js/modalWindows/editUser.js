@@ -23,12 +23,12 @@ async function editUser(event) {
         id: 'editModal' + event.target.dataset.id,
         title: 'Edit user',
         formID: 'editFORM',
-        formURL: '/edit/' + event.target.dataset.id,
+        formURL: 'http:\/\/localhost:8080\/index-page\/edit\/' + event.target.dataset.id,
         formMethod: 'POST',
         body: `
               <label for="id0"><b>ID</b></label>
                     <input name="id" type="text" class="form-control"
-                           id="id0" value="${user.id}" readonly="true"/>
+                           id="id0" value="${user.id}" readonly/>
                     <br>
                     <label for="name0"><b>First name</b></label>
                     <input name="name" type="text"
@@ -56,11 +56,11 @@ async function editUser(event) {
                            tvalue=""/>
                     <br>
                     <label><b>Role</b></label>
-                    <input type="checkbox" id="2" name="ADMIN"
+                    <input type="checkbox" id="2" name="admin"
                            value="ADMIN" ${admin_check}>
                     <label for="ADMIN">Admin</label>
                     
-                    <input type="checkbox" id="1" name="USER"
+                    <input type="checkbox" id="1" name="user"
                            value="USER" ${user_check}>
                     <label for="USER">User</label>
                     <br><br>

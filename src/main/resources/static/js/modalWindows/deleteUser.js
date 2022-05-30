@@ -22,12 +22,12 @@ async function deleteUser(event) {
         id: 'deleteModal' + event.target.dataset.id,
         title: 'Delete user',
         formID: 'deleteFORM',
-        formURL: '/deleteUser/' + event.target.dataset.id,
+        formURL: 'http:\/\/localhost:8080\/index-page\/deleteUser\/' + event.target.dataset.id,
         formMethod: 'DELETE',
         body: `
               <label for="id0"><b>ID</b></label>
                     <input name="id" type="text" class="form-control"
-                           id="id0" value="${user.id}" readonly="true" disabled />
+                           id="id0" value="${user.id}" readonly />
                     <br>
                     <label for="name0"><b>First name</b></label>
                     <input name="name" type="text"
@@ -50,11 +50,11 @@ async function deleteUser(event) {
                            value="${user.email}" disabled/>
                     <br>
                     <label><b>Role</b></label>
-                    <input type="checkbox" id="2" name="ADMIN"
+                    <input type="checkbox" id="2" name="admin"
                            value="ADMIN" ${admin_check} disabled/>
                     <label for="ADMIN">Admin</label>
                     
-                    <input type="checkbox" id="1" name="USER"
+                    <input type="checkbox" id="1" name="user"
                            value="USER" ${user_check} disabled>
                     <label for="USER">User</label>
                     <br><br>

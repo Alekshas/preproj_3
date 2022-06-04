@@ -13,7 +13,7 @@ ModalApp.ModalProcess = function (parameters) {
         '<div class="modal-content">' +
         '<div class="modal-header">' +
         '<h5 class="modal-title">' + this.title + '</h5>' +
-        '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+        '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>' +
         '</div>' +
         '<form action="' + this.formURL + '" id = "' + this.formID + '" method="' + this.formMethod + '">' +
         '<div class="modal-body">' + this.body + '</div>' +

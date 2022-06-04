@@ -1,7 +1,6 @@
 async function deleteUser(event) {
     let promise = await fetch("http://localhost:8080/index-page/getUser/" + event.target.dataset.id);
     let user = await promise.json();
-
     let admin_check = "";
     let user_check = "";
     let roles = '';

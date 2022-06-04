@@ -1,6 +1,7 @@
 package ru.nast.bootstrapSp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,15 +12,16 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Getter
-@Setter
+@Data
 @Table(name = "roles")
 @NoArgsConstructor
 public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String role;
+
     @JsonIgnore
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;

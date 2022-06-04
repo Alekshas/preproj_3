@@ -3,6 +3,7 @@ package ru.nast.bootstrapSp.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,22 +21,26 @@ import java.util.Set;
 @Table(name = "users")
 @NoArgsConstructor
 public class User implements UserDetails {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @Column(unique = true)
     private String name;
+
     private String lastname;
+
     private int age;
+
     private String email;//unique
+
     @JsonIgnore
     private String password;
+
     @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "users_id"), inverseJoinColumns = @JoinColumn(name = "roles_id"))
     private Set<Role> roles;
-
 
 
     public User(String name, String lastname,int age,String email, String password, Set<Role> roles) {

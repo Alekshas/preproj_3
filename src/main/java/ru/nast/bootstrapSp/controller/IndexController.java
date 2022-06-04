@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.nast.bootstrapSp.DTO.CreateUserDTO;
 import ru.nast.bootstrapSp.DTO.DeleteUserDTO;
 import ru.nast.bootstrapSp.DTO.EditUserDTO;
+import ru.nast.bootstrapSp.mapping.UserMapper;
 import ru.nast.bootstrapSp.model.Role;
 import ru.nast.bootstrapSp.model.User;
 import ru.nast.bootstrapSp.service.UserService;
@@ -22,10 +23,13 @@ import java.util.Set;
 public class IndexController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+    private UserMapper userMapper;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/getCurrentUser")
     public User getCurrentUser() {
@@ -44,36 +48,13 @@ public class IndexController {
 
     @PostMapping("/adduser")
     public ResponseEntity<HttpStatus> saveUser(@RequestBody CreateUserDTO createUserDTO) {
-        Set<Role> roles = new HashSet<>();
-
-        if (createUserDTO.getAdmin() != null){
-            roles.add(new Role(1L, "ADMIN"));
-        }
-        if (createUserDTO.getUser() != null){
-            roles.add(new Role(2L, "USER"));
-        }
-        User user = new User(createUserDTO.getName(), createUserDTO.getLastname(), createUserDTO.getAge(),
-                createUserDTO.getEmail(), createUserDTO.getPassword(), roles);
-        userService.add(user);
-
+        userService.add(userMapper.mappingCreateUser(createUserDTO));
         return ResponseEntity.ok().build();
     }
 
-
     @PostMapping("/edit/{id}")
     public ResponseEntity<HttpStatus> updateUser(@RequestBody EditUserDTO editUserDTO) {
-        Set<Role> roles = new HashSet<>();
-        if (editUserDTO.getAdmin() != null){
-            roles.add(new Role(1L, "ADMIN"));
-        }
-        if (editUserDTO.getUser() != null){
-            roles.add(new Role(2L, "USER"));
-        }
-        User user = new User(editUserDTO.getId(),editUserDTO.getName(), editUserDTO.getLastname(), editUserDTO.getAge(),
-                editUserDTO.getEmail(), editUserDTO.getPassword(), roles);
-        userService.update(user);
-
-
+        userService.update(userMapper.mappingEditUser(editUserDTO));
         return ResponseEntity.ok().build();
     }
 
@@ -82,7 +63,4 @@ public class IndexController {
         userService.delete(userService.getById(deleteUserDTO.getId()));
         return ResponseEntity.ok().build();
     }
-
-
-
 }

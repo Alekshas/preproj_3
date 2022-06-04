@@ -9,7 +9,6 @@ public class CreateUserDTO {
     private int age;
     private String email;
     private String password;
-
     private String admin;
     private String user;
 
